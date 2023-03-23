@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="AsciiEncoderTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2023-03-23T19:06:21" hostname="DESKTOP-R3N4AN8" time="0.056">
+  <properties/>
+  <testcase name="characterNotAsciiBinaryInputEncode()" classname="AsciiEncoderTest" time="0.031"/>
+  <testcase name="correctDecode()" classname="AsciiEncoderTest" time="0.01"/>
+  <testcase name="wrongLengthBinaryInputEncode()" classname="AsciiEncoderTest" time="0.002"/>
+  <testcase name="unexpectedCharacterInputEncode()" classname="AsciiEncoderTest" time="0.002"/>
+  <testcase name="notAsciiCarDecode()" classname="AsciiEncoderTest" time="0.003"/>
+  <testcase name="correctEncoderTest()" classname="AsciiEncoderTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

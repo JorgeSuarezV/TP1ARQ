@@ -1,4 +1,5 @@
 rootProject.name = 'TP1ARQ'
 include 'calculator'
 include 'encoder'
+include 'ascii_encoder'
 
