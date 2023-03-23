@@ -22,7 +22,7 @@ public class AsciiEncoderImplementation implements AsciiEncoder {
 
     @Override
     public String encode(String binary) {
-        checkMaliciosInputBinary(binary);
+        checkMaliciousInputBinary(binary);
         return toText(binary);
     }
 
@@ -35,7 +35,7 @@ public class AsciiEncoderImplementation implements AsciiEncoder {
         return toString.toString();
     }
 
-    private void checkMaliciosInputBinary(String binary) {
+    private void checkMaliciousInputBinary(String binary) {
         if ((binary.length() % 8) != 0) throw new InputMismatchException("input length must be multiple of 8");
         for (char c : binary.toCharArray()) {
             if (!(c == '0' || c == '1')) throw new InputMismatchException("Input must be binary");
