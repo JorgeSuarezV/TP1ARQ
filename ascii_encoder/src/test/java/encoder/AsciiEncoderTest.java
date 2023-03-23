@@ -1,6 +1,9 @@
+package encoder;
+
+import encoder.AsciiEncoder;
+import encoder.AsciiEncoderImplementation;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import sun.reflect.annotation.ExceptionProxy;
 
 import java.util.InputMismatchException;
 

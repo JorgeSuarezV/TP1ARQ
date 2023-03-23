@@ -1,3 +1,5 @@
+package encoder;
+
 public interface AsciiEncoder {
     String encode(String binary);
 
