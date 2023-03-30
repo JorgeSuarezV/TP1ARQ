@@ -37,8 +37,17 @@ class GoodCalculator: Calculator {
     }
 
     private fun opposite(b: String) = b.map { c -> if (c == '1') '0' else '1' }.toString()
-    override fun mult(a: String, b: String): String {
-        TODO("Not yet implemented")
+    override fun mult(multiplicand: String, multiplier: String): String {
+        val valuesToBeSum = multiplicand.fold(listOf<String>()) { allMultValues, multiplicandValue ->
+            val value = multiplier.foldRight("") { c, acc -> acc + mult(multiplicandValue, c) }
+            allMultValues + value
+        }
+        return valuesToBeSum.reduce {left, right -> sum(left, right)}
+    }
+
+    private fun mult(multiplicand: Char, multiplier: Char): Char {
+        return if (multiplicand == '0' || multiplier == '0') '0'
+        else '1'
     }
 
     override fun div(a: String?, b: String?): String {
