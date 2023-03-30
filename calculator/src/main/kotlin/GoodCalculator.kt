@@ -32,11 +32,12 @@ class GoodCalculator: Calculator {
     }
 
 
-    override fun sub(a: String?, b: String?): String {
-        TODO("Not yet implemented")
+    override fun sub(a: String, b: String): String {
+        return sum (opposite(a), opposite(b))
     }
 
-    override fun mult(a: String?, b: String?): String {
+    private fun opposite(b: String) = b.map { c -> if (c == '1') '0' else '1' }.toString()
+    override fun mult(a: String, b: String): String {
         TODO("Not yet implemented")
     }
 
