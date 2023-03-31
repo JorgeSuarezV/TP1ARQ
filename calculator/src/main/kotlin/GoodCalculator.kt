@@ -1,9 +1,10 @@
 class GoodCalculator: Calculator {
     override fun sum(a: String, b: String): String {
-        return a.zip(b).foldRight(Pair('0', "")) { (leftOperator, rightOperator), (carry, previousValues) ->
-            val (newCarry, result) = sum(leftOperator, rightOperator, carry)
-            Pair(newCarry, result + previousValues)
-        }.second
+      val (carry, result) = a.zip(b).foldRight(Pair('0', "")) { (leftOperator, rightOperator), (carry, previousValues) ->
+        val (newCarry, result) = sum(leftOperator, rightOperator, carry)
+        Pair(newCarry, result + previousValues)
+      }
+      return if (carry == '1') carry + result else result
     }
 
     private fun sum(leftOperator: Char, rightOperator: Char, carry: Char): Pair<Char, Char> {
