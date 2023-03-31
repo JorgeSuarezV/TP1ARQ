@@ -24,4 +24,15 @@ class CalculatorTest {
       assertEquals(it.result, sub)
     }
   }
+
+  @Test
+  fun mult() {
+    val inputStream = FileInputStream(("src/test/resources/multTest"))
+    val readCsv = ReadValue.readCsv(inputStream)
+    inputStream.close()
+    readCsv.forEach {
+      val sub = GoodCalculator().mult(it.left, it.right)
+      assertEquals(it.result, sub)
+    }
+  }
 }
