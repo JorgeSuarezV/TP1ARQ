@@ -6,7 +6,7 @@ class SumTest {
 
   @Test
   fun test() {
-    val inputStream = FileInputStream("/home/indigo/proyects/TP1ARQ/calculator/src/test/resources/sumTest")
+    val inputStream = FileInputStream(("src/test/resources/sumTest"))
     val readCsv = ReadValue.readCsv(inputStream)
     inputStream.close()
     readCsv.forEach {
