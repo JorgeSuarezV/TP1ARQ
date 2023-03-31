@@ -1,11 +1,8 @@
 class GoodCalculator: Calculator {
     override fun sum(a: String, b: String): String {
-        return a.zip(b).fold(Pair('0', "")) { carryResult, pair ->
-            val leftOperator = pair.first
-            val rightOperator = pair.second
-            val carry = carryResult.first
-            val sum = sum(leftOperator, rightOperator, carry)
-            Pair(sum.first, sum.second + carryResult.second)
+        return a.zip(b).foldRight(Pair('0', "")) { (leftOperator, rightOperator), (carry, previousValues) ->
+            val (newCarry, result) = sum(leftOperator, rightOperator, carry)
+            Pair(newCarry, result + previousValues)
         }.second
     }
 
