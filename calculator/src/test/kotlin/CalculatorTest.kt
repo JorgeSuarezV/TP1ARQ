@@ -1,6 +1,8 @@
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import java.io.FileInputStream
+import java.util.*
 
 class CalculatorTest {
 
@@ -34,5 +36,19 @@ class CalculatorTest {
       val sub = GoodCalculator().mult(it.left, it.right)
       assertEquals(it.result, sub)
     }
+  }
+
+  @Test
+  fun toHex(){
+    val inputStream = FileInputStream(("src/test/resources/toHexTest"))
+    val readCsv = ReadValue.readCsv(inputStream)
+    inputStream.close()
+    readCsv.forEach {
+      val sub = GoodCalculator().toHex(it.left)
+      assertEquals(it.right, sub)
+    }
+
+    val exception: Exception = Assertions.assertThrows(Exception::class.java) { GoodCalculator().toHex("") }
+    assertEquals("Input cannot be null", exception.message)
   }
 }

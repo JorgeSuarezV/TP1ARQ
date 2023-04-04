@@ -76,7 +76,34 @@ class GoodCalculator : Calculator {
   }
 
   override fun toHex(binary: String?): String {
-    TODO("Not yet implemented")
+    if (binary != "") {
+      if (binary != null) {
+        if (binary.length % 4 != 0) {
+          return toHex("0$binary") //lo hace de longitud multiplo de 4
+        }
+
+        val binaryDividedIn4: List<String> = binary.chunked(4) //divide en grupos de 4
+        var result: String = ""
+        for (i in binaryDividedIn4) {
+          result = fourBinaryToHex(i) + result //convierte cada grupo de 4 a hexadecimal
+        }
+
+        return result
+      }
+      } else {
+        throw Exception("Input cannot be null")
+    }
+    return ""
+  }
+
+  private fun fourBinaryToHex(binary : String ) : String {
+    val conversionTable = mapOf(
+            "0000" to "0", "0001" to "1", "0010" to "2", "0011" to "3",
+            "0100" to "4", "0101" to "5", "0110" to "6", "0111" to "7",
+            "1000" to "8", "1001" to "9", "1010" to "A", "1011" to "B",
+            "1100" to "C", "1101" to "D", "1110" to "E", "1111" to "F"
+    )
+    return conversionTable.getValue(binary)
   }
 
   override fun fromHex(hex: String?): String {
