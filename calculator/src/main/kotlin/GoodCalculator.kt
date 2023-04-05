@@ -1,6 +1,7 @@
 class GoodCalculator : Calculator {
   override fun sum(a: String, b: String): String {
-    val (carry, result) = sumHelper(a, b)
+    val sameLengthBinaries = binariesSameLength(a,b)
+    val (carry, result) = sumHelper(sameLengthBinaries.first, sameLengthBinaries.second)
     return if (carry == '1') carry + result else result
   }
 
@@ -37,7 +38,8 @@ class GoodCalculator : Calculator {
   }
 
   override fun sub(a: String, b: String): String {
-    val sumHelper = sumHelper(a, opposite(b))
+    val sameLengthBinaries = binariesSameLength(a,b)
+    val sumHelper = sumHelper(sameLengthBinaries.first, opposite(sameLengthBinaries.second))
     val second = sumHelper.second
     val inverseResult = if (sumHelper.first == '1') {
       sum(second, "0".repeat(second.length - 1) + "1")
@@ -54,6 +56,16 @@ class GoodCalculator : Calculator {
     }.joinToString(
       separator = ""
     )
+  }
+
+  private fun binariesSameLength(a:String , b:String): Pair<String, String> {
+    val aLength = a.length
+    val bLength = b.length
+    return if (aLength > bLength) {
+      Pair(a, b.padStart(aLength, '0'))
+    } else {
+      Pair(a.padStart(bLength, '0'), b)
+    }
   }
 
   override fun mult(a: String, b: String): String {

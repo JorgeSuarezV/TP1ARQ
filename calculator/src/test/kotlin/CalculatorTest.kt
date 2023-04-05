@@ -12,7 +12,7 @@ class CalculatorTest {
     val readCsv = ReadValue.readCsv(inputStream)
     inputStream.close()
     readCsv.forEach {
-      assertEquals(GoodCalculator().sum(it.left, it.right), it.result)
+      assertEquals( it.result, GoodCalculator().sum(it.left, it.right))
     }
   }
 
