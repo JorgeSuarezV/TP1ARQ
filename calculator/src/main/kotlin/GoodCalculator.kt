@@ -72,36 +72,40 @@ class GoodCalculator : Calculator {
   }
 
   override fun div(dividend: String?, divisor: String?): String {
-    var result = dividend
-    var i : 0
-    while (compareNumbers(result,divisor)>=0)  {
-      result=sub(result,divisor)
+    if (dividend == null || divisor == null) {
+      throw Exception("Input cannot be null")
+    }
+    var result : String = dividend
+    var i: Int = 0
+    while (compareNumbers(result,divisor) >=0)  {
+      result= sub(result,divisor)
       i++
     }
     return fromIntToBinary(i);
   }
 
-  private fun fromIntToBinary(bits:int){
-    char[] bitsArray = bits.toCharArray();
-    int result = 0;
-    for (int i = 0; i < bitsArray.length; i++) {
-      result += (int) (Integer.parseInt("" + bitsArray[bitsArray.length - 1 - i]) * Math.pow(2, i));
+  private fun fromIntToBinary(bits: Int) : String{
+    var result : String = ""
+    var i : Int = bits
+    while (i > 0) {
+      result = if (i % 2 == 0) "0" + result else "1" + result
+      i /= 2
     }
-    return "" + result;
+    return result
   }
 
 
-  private fun compareNumbers(a:String,b: String){
-    var parsedNumberA : cut0inFront(a)
-    var parsedNumberB : cut0inFront(b)
+  private fun compareNumbers(a:String,b: String) : Int{
+    var parsedNumberA = cut0inFront(a)
+    var parsedNumberB = cut0inFront(b)
     if(parsedNumberA.length>parsedNumberB.length) return 1;
     if(parsedNumberB.length>parsedNumberA.length) return -1;
-    else : {
+    else {
       for(i in parsedNumberA.length..0){
-        if((parsedNumberA.get(i)=="0" && parsedNumberB.get(i)=="1" )){
+        if((parsedNumberA.get(i).equals("0") && parsedNumberB.get(i).equals("1") )){
           return -1;
         }
-        else if((parsedNumberA.get(i)=="1" && parsedNumberB.get(i)=="0" )){
+        else if((parsedNumberA.get(i).equals("1") && parsedNumberB.get(i).equals("0") )){
           return 1;
         }
       }
@@ -114,11 +118,12 @@ class GoodCalculator : Calculator {
     var result : String = binary
     for (i in binary.length..0){
        if (binary.get(i).equals("0")){
-         result = binary.subSequence(0 , i-1)
+         result = binary.subSequence(0 , i-1).toString()
        }else{
          return result
        }
     }
+    return result
   }
 
   override fun toHex(binary: String?): String {

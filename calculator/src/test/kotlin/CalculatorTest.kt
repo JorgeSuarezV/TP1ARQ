@@ -39,6 +39,17 @@ class CalculatorTest {
   }
 
   @Test
+  fun div(){
+    val inputStream = FileInputStream(("src/test/resources/divTest"))
+    val readCsv = ReadValue.readCsv(inputStream)
+    inputStream.close()
+    readCsv.forEach {
+      val sub = GoodCalculator().div(it.left, it.right)
+      assertEquals(it.result, sub)
+    }
+  }
+
+  @Test
   fun toHex(){
     val inputStream = FileInputStream(("src/test/resources/toHexTest"))
     val readCsv = ReadValue.readCsv(inputStream)
