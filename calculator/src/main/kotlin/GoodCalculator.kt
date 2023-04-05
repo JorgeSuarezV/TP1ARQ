@@ -115,15 +115,15 @@ class GoodCalculator : Calculator {
   }
 
   private fun cut0inFront(binary : String ) : String{
-    var result : String = binary
-    for (i in binary.length..0){
-       if (binary.get(i).equals("0")){
-         result = binary.subSequence(0 , i-1).toString()
-       }else{
-         return result
-       }
+    val firstNonZeroIndex = binary.indexOfFirst { it != '0' }
+
+    if (firstNonZeroIndex == -1) {
+      return "0"
     }
-    return result
+    if (firstNonZeroIndex == 0) {
+      return binary
+    }
+    return binary.substring(firstNonZeroIndex)
   }
 
   override fun toHex(binary: String?): String {
@@ -149,7 +149,7 @@ class GoodCalculator : Calculator {
 
   private fun fourBinaryToHex(binary : String ) : String {
     val conversionTable = mapOf(
-            "0000" to "0", "0001" to "1", "0010" to "2", "0011" to "3",
+            "0000" to "0000", "0001" to "1", "0010" to "2", "0011" to "3",
             "0100" to "4", "0101" to "5", "0110" to "6", "0111" to "7",
             "1000" to "8", "1001" to "9", "1010" to "A", "1011" to "B",
             "1100" to "C", "1101" to "D", "1110" to "E", "1111" to "F"
@@ -158,6 +158,27 @@ class GoodCalculator : Calculator {
   }
 
   override fun fromHex(hex: String?): String {
-    TODO("Not yet implemented")
+    if (hex != "") {
+      if (hex != null) {
+        var result: String = ""
+        for (i in hex.length-1 downTo  0) {
+          result = hexToFourBinary(hex[i]) + result //convierte hex a binario
+        }
+        return cut0inFront(result)
+      }
+    } else {
+      throw Exception("Input cannot be null")
+    }
+    return ""
+  }
+
+  private fun hexToFourBinary (hex: Char) : String {
+    val conversionTable = mapOf(
+            "0" to "0000", "1" to "0001", "2" to "0010", "3" to "0011",
+            "4" to "0100", "5" to "0101", "6" to "0110", "7" to "0111",
+            "8" to "1000", "9" to "1001", "A" to "1010", "B" to "1011",
+            "C" to "1100", "D" to "1101", "E" to "1110", "F" to "1111"
+    )
+    return conversionTable.getValue(hex.toString())
   }
 }

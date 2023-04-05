@@ -62,4 +62,18 @@ class CalculatorTest {
     val exception: Exception = Assertions.assertThrows(Exception::class.java) { GoodCalculator().toHex("") }
     assertEquals("Input cannot be null", exception.message)
   }
+
+  @Test
+  fun fromHex(){
+    val inputStream = FileInputStream(("src/test/resources/fromHexTest"))
+    val readCsv = ReadValue.readCsv(inputStream)
+    inputStream.close()
+    readCsv.forEach {
+      val sub = GoodCalculator().fromHex(it.left)
+      assertEquals(it.right, sub)
+    }
+
+    val exception: Exception = Assertions.assertThrows(Exception::class.java) { GoodCalculator().fromHex("") }
+    assertEquals("Input cannot be null", exception.message)
+  }
 }
